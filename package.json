@@ -1,0 +1,13 @@
+{
+  "name": "motor-discos-hernias-deshidratacion",
+  "version": "1.0.0",
+  "description": "Motor lingüístico para discos intervertebrales, hernias y deshidratación discal lumbar.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "latest",
+    "express": "latest"
+  }
+}
