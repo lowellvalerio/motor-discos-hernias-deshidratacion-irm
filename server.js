@@ -266,6 +266,22 @@ function descDeshidratacion(niveles, modo = 'NIVELES', referenciaDirecta = false
   ]);
 }
 
+function ordenarNivelesLumbar(niveles = []) {
+  const orden = {
+    'D10-D11': 1,
+    'D11-D12': 2,
+    'D12-L1': 3,
+    'L1-L2': 4,
+    'L2-L3': 5,
+    'L3-L4': 6,
+    'L4-L5': 7,
+    'L5-S1': 8
+  };
+
+  return [...new Set(niveles.filter(Boolean))]
+    .sort((a, b) => (orden[a] || 999) - (orden[b] || 999));
+}
+
 function generarDeshidratacionGlobal(desh = {}, nivelesReferencia = []) {
   const modo = desh.modo || 'NO';
   if (modo === 'NO') return null;
@@ -279,6 +295,10 @@ function generarDeshidratacionGlobal(desh = {}, nivelesReferencia = []) {
     niveles = normLevels(nivelesReferencia, []);
   } else {
     niveles = ['L4-L5'];
+  }
+
+  if (modo === 'ANTERIOR' || modo === 'ANTERIORES_PLURAL') {
+    niveles = ordenarNivelesLumbar(niveles);
   }
 
   const referenciaDirecta = ['ANTERIOR', 'ANTERIORES_PLURAL'].includes(modo) || sameLevels(niveles, nivelesReferencia);
